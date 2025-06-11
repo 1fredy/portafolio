@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habilidades – Portafolio profesional</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html" class="lang" data-es="Inicio" data-en="Home">Inicio</a>
+            <a href="sobre-mi.html" class="lang" data-es="Sobre mí" data-en="About Me">Sobre mí</a>
+            <a href="Habilidades.html" class="lang" data-es="Habilidades" data-en="Skills">Habilidades</a>
+            <a href="Proyectos.html" class="lang" data-es="Proyectos" data-en="Projects">Proyectos</a>
+            <a href="contacto.html" class="lang" data-es="Contacto" data-en="Contact">Contacto</a>
+            <button class="lang-button" onclick="cambiarIdioma()">EN</button>
+        </div>
+    </nav>
+
+    <section id="habilidades" class="section reveal">
+        <div class="container">
+            <h2 class="lang" data-es="Mis Habilidades" data-en="My Skills">Mis Habilidades</h2>
+            <div class="galeria-habilidades">
+                <div class="habilidad-card" onclick="abrirModal('img/Html.png')">
+                    <div class="habilidad-contenido">
+                        <img src="img/Html.png" alt="HTML Icono"> <span class="lang" data-es="HTML" data-en="HTML">HTML</span>
+                    </div>
+                </div>
+
+                <div class="habilidad-card" onclick="abrirModal('img/css.png')">
+                    <div class="habilidad-contenido">
+                        <img src="img/css.png" alt="CSS Icono"> <span class="lang" data-es="CSS" data-en="CSS">CSS</span>
+                    </div>
+                </div>
+
+                <div class="habilidad-card" onclick="abrirModal('img/js.png', 'JavaScript: Lenguaje de programación que permite añadir interactividad y dinamismo a las páginas web.')">
+                    <div class="habilidad-contenido">
+                        <img src="img/js.png" alt="JavaScript Icono"> <span class="lang" data-es="JavaScript" data-en="JavaScript">JavaScript</span>
+                    </div>
+                </div>
+
+                <div class="habilidad-card" onclick="abrirModal('img/python.png', 'Python: Lenguaje de programación versátil utilizado en desarrollo web, análisis de datos, IA y más.')">
+                    <div class="habilidad-contenido">
+                        <img src="img/python.png" alt="Python Icono"> <span class="lang" data-es="Python" data-en="Python">Python</span>
+                    </div>
+                </div>
+
+                <div class="habilidad-card" onclick="abrirModal('img/mysql.png', 'MySQL: Sistema de gestión de bases de datos relacionales muy popular para aplicaciones web.')">
+                    <div class="habilidad-contenido">
+                        <img src="img/mysql.png" alt="MySQL Icono"> <span class="lang" data-es="MySQL" data-en="MySQL">MySQL</span>
+                    </div>
+                </div>
+
+                </div>
+        </div>
+    </section>
+
+    <div id="modal-imagen" class="modal">
+        <span class="cerrar-modal" onclick="cerrarModal()">&times;</span>
+        <div class="modal-contenido">
+            <img id="imagen-modal" src="" alt="">
+            <p id="titulo-modal" style="color: white; text-align: center; margin-top: 10px;"></p>
+        </div>
+    </div>
+
+    <script>
+        // Funciones del Modal
+        function abrirModal(src, titulo) {
+            const modal = document.getElementById('modal-imagen');
+            const imagenModal = document.getElementById('imagen-modal');
+            const tituloModal = document.getElementById('titulo-modal');
+            
+            imagenModal.src = src;
+            tituloModal.textContent = titulo;
+            modal.style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-imagen').style.display = 'none';
+        }
+
+        window.addEventListener('click', (event) => {
+            if (event.target === document.getElementById('modal-imagen')) {
+                cerrarModal();
+            }
+        });
+
+        // Sistema de idiomas
+        let idiomaActual = localStorage.getItem('idioma') || 'es';
+
+        function cambiarIdioma() {
+            const elementos = document.querySelectorAll('.lang');
+            idiomaActual = idiomaActual === 'es' ? 'en' : 'es';
+
+            elementos.forEach(el => {
+                const nuevoTexto = el.dataset[idiomaActual];
+                if (nuevoTexto) {
+                    el.textContent = nuevoTexto;
+                }
+            });
+
+            const btn = document.querySelector('.lang-button');
+            if (btn) {
+                btn.textContent = idiomaActual === 'es' ? 'EN' : 'ES';
+            }
+
+            localStorage.setItem('idioma', idiomaActual);
+        }
+
+        // Aplicar idioma al cargar y manejar enlaces de navegación
+        window.addEventListener('DOMContentLoaded', () => {
+            cambiarIdioma();
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const target = this.getAttribute('href');
+
+                    if (target && !target.startsWith("http")) {
+                        window.location.href = target;
+                    } else if (target) {
+                        window.open(target, "_blank");
+                    }
+                });
+            });
+        });
+
+        // Funcionalidad para revelar elementos al hacer scroll
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.reveal').forEach(element => {
+            revealObserver.observe(element);
+        });
+    </script>
+
+</body>
+</html>

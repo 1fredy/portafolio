@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyectos – Portafolio profesional</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html" class="lang" data-es="Inicio" data-en="Home">Inicio</a>
+            <a href="sobre-mi.html" class="lang" data-es="Sobre mí" data-en="About Me">Sobre mí</a>
+            <a href="Habilidades.html" class="lang" data-es="Habilidades" data-en="Skills">Habilidades</a>
+            <a href="Proyectos.html" class="lang" data-es="Proyectos" data-en="Projects">Proyectos</a>
+            <a href="contacto.html" class="lang" data-es="Contacto" data-en="Contact">Contacto</a>
+            <button class="lang-button" onclick="cambiarIdioma()">EN</button>
+        </div>
+    </nav>
+
+    <section id="proyectos" class="section reveal">
+        <div class="container">
+            <h2 class="lang" data-es="Mis Proyectos" data-en="My Projects">Mis Proyectos</h2>
+            <div class="galeria-proyectos">
+                
+                <div class="proyecto-card" onclick="abrirModal('img/calculadora-salarial.png', 'Cálculo de Salarios en El Salvador - Programador: Aplicación web Full Stack para calcular salarios de trabajadores.')">
+                    <img src="img/calculadora-salarial.png" alt="Cálculo de Salarios">
+                    <h3 class="titulo-proyecto lang"
+                        data-es="Cálculo de Salarios en El Salvador - Programador"
+                        data-en="Salary Calculator in El Salvador - Back-End">
+                        Cálculo de Salarios en El Salvador 
+                    </h3>
+                    <p class="descripcion-proyecto lang"
+                       data-es="Aplicación web para calcular el salario de los trabajadores en El Salvador. Desarrollador Full Stack."
+                       data-en="Web app to calculate workers’ salaries in El Salvador. Full Stack Developer.">
+                        Aplicación web para calcular el salario de los trabajadores en El Salvador. Desarrollador Full Stack.
+                    </p>
+                    <a href="https://1fredy.github.io/salario/"
+                       class="btn-proyecto lang"
+                       data-es="Ver Proyecto"
+                       data-en="View Project"
+                       target="_blank">
+                        Ver Proyecto
+                    </a>
+                </div>
+
+                <div class="proyecto-card" onclick="abrirModal('img/Cisco.png')">
+                    <img src="img/Cisco.png" alt="Proyecto RadioShat">
+                    <h3 class="titulo-proyecto lang"
+                        data-es="Proyecto RadioShat - Administrador de Redes"
+                        data-en="RadioShat Project - Network Administrator">
+                        Proyecto RadioShat 
+                    </h3>
+                    <p class="descripcion-proyecto lang"
+                       data-es="Topologia realizada en Cisco Packet Tracer con la funcion de enviar pedidos a computadora de otro municipio."
+                       data-en="Topology created in Cisco Packet Tracer with the function of sending requests to a computer in another municipality.">
+                       
+                    </p>
+                    <a href="https://github.com/1fredy/RadioShat1.git" class="btn-proyecto lang"
+                       data-es="Ver Proyecto"
+                       data-en="View Project"
+                       target="_blank">
+                        Ver Proyecto
+                    </a>
+                </div>
+
+                </div>
+        </div>
+    </section>
+
+    <div id="modal-imagen" class="modal">
+        <span class="cerrar-modal" onclick="cerrarModal()">&times;</span>
+        <div class="modal-contenido">
+            <img id="imagen-modal" src="" alt="">
+            <p id="titulo-modal" style="color: white; text-align: center; margin-top: 10px;"></p>
+        </div>
+    </div>
+
+    <script>
+        // Funciones del Modal
+        function abrirModal(src, titulo) {
+            const modal = document.getElementById('modal-imagen');
+            const imagenModal = document.getElementById('imagen-modal');
+            const tituloModal = document.getElementById('titulo-modal');
+            
+            imagenModal.src = src;
+            tituloModal.textContent = titulo;
+            modal.style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal-imagen').style.display = 'none';
+        }
+
+        window.addEventListener('click', (event) => {
+            if (event.target === document.getElementById('modal-imagen')) {
+                cerrarModal();
+            }
+        });
+
+        // Sistema de idiomas
+        let idiomaActual = localStorage.getItem('idioma') || 'es';
+
+        function cambiarIdioma() {
+            const elementos = document.querySelectorAll('.lang');
+            idiomaActual = idiomaActual === 'es' ? 'en' : 'es';
+
+            elementos.forEach(el => {
+                const nuevoTexto = el.dataset[idiomaActual];
+                if (nuevoTexto) {
+                    el.textContent = nuevoTexto;
+                }
+            });
+
+            const btn = document.querySelector('.lang-button');
+            if (btn) {
+                btn.textContent = idiomaActual === 'es' ? 'EN' : 'ES';
+            }
+
+            localStorage.setItem('idioma', idiomaActual);
+        }
+
+        // Aplicar idioma al cargar y manejar enlaces de navegación
+        window.addEventListener('DOMContentLoaded', () => {
+            cambiarIdioma();
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const target = this.getAttribute('href');
+
+                    if (target && !target.startsWith("http")) {
+                        window.location.href = target;
+                    } else if (target) {
+                        window.open(target, "_blank");
+                    }
+                });
+            });
+        });
+
+        // Funcionalidad para revelar elementos al hacer scroll
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.reveal').forEach(element => {
+            revealObserver.observe(element);
+        });
+    </script>
+
+</body>
+</html>

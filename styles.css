@@ -1,0 +1,924 @@
+/* --- Variables CSS (Custom Properties) --- */
+:root {
+    /* Colores Modo Claro */
+    --color-dark: #333;
+    --color-light-gray: #f4f4f4;
+    --color-medium-gray: #e9ecef;
+    --color-text-body: #666;
+    --color-text-label: #555;
+    --color-text-dark: #2c3e50;
+    --color-white: #fff;
+    --color-blue-primary: #007bff; /* Color azul primario para botones y acentos */
+    --color-blue-hover: #0056b3;   /* Color azul hover para botones y acentos */
+    --color-green-success: #28a745;
+    --color-green-success-bg: #d4edda;
+    --color-green-success-text: #155724;
+
+    /* Sombras */
+    --shadow-small: 0 2px 10px rgba(0, 0, 0, 0.05);
+    --shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --shadow-large: 0 8px 25px rgba(0, 0, 0, 0.1);
+    --shadow-hover-large: 0 12px 35px rgba(0, 0, 0, 0.15); /* Para hover de cards principales */
+    --shadow-card-float: 0 5px 20px rgba(0, 0, 0, 0.15); /* Para burbujas de habilidad */
+    --shadow-card-float-hover: 0 10px 30px rgba(0, 0, 0, 0.25);
+    --shadow-btn-default: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para botones por defecto */
+    --shadow-btn-default-hover: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombra hover para botones por defecto */
+
+
+    /* Transiciones */
+    --transition-default: 0.3s ease;
+    --transition-transform-shadow: transform 0.3s ease, box-shadow 0.3s ease;
+    --transition-transform-shadow-strong: transform 0.3s ease, box-shadow 0.3s ease;
+    --transition-transform-hover: transform 0.2s ease;
+
+    /* Colores Modo Nocturno (Dark Mode) - Variables específicas para Dark Mode */
+    --dark-mode-bg-main: #1a1a2e;
+    --dark-mode-bg-section: #2a2a3e;
+    --dark-mode-bg-navbar: #0f0f1c;
+    --dark-mode-bg-card: #1f1f2e;
+    --dark-mode-bg-input: #2f2f4e;
+    --dark-mode-text-main: #e0e0e0;
+    --dark-mode-text-title: #ffffff;
+    --dark-mode-border-input: #4a4a5e;
+    --dark-mode-border-focus: #0099ff;
+
+    --dark-mode-blue-primary: #0099ff; /* Azul para botones en modo oscuro */
+    --dark-mode-blue-hover: #007acc; /* Azul hover en modo oscuro */
+
+    --dark-mode-shadow-card: 0 4px 15px rgba(0, 0, 0, 0.3);
+    --dark-mode-shadow-card-hover: 0 8px 25px rgba(0, 0, 0, 0.5);
+    --dark-mode-shadow-float-hover: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --dark-mode-form-status-bg: #3e5a3e;
+    --dark-mode-form-status-text: #d4edda;
+}
+
+/* --- Estilos Generales del Body y Contenedor --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--color-light-gray);
+    color: var(--color-dark);
+    transition: background-color var(--transition-default), color var(--transition-default); /* Transición para modo oscuro */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Barra de Navegación (Navbar) --- */
+.navbar {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    padding: 15px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color var(--transition-default), box-shadow var(--transition-default); /* Transición para modo oscuro */
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--color-white);
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    transition: var(--transition-default);
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background-color: #555;
+    color: #ffd700; /* Dorado para hover */
+}
+
+.lang-button {
+    background-color: var(--color-blue-primary); /* Este botón aún es azul */
+    color: var(--color-white);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 20px;
+    transition: var(--transition-default);
+}
+
+.lang-button:hover {
+    background-color: var(--color-blue-hover);
+}
+
+/* --- Botón de Modo Nocturno (Dark Mode Toggle) --- */
+.dark-mode-toggle {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    border: 1px solid #555;
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-left: 15px;
+    transition: background-color var(--transition-default), color var(--transition-default), border-color var(--transition-default);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+.dark-mode-toggle:hover {
+    background-color: #555;
+    color: #ffd700;
+    border-color: #ffd700;
+}
+
+/* --- Estilos Generales de las Secciones --- */
+.section {
+    padding: 80px 0;
+    text-align: center;
+    background-color: var(--color-white);
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-small);
+    transition: background-color var(--transition-default), box-shadow var(--transition-default); /* Transición para modo oscuro */
+}
+
+/* --- Sección Hero (Inicio) --- */
+#hero {
+    background-color: var(--color-light-gray);
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content h1 {
+    font-size: 3.5em;
+    color: var(--color-dark);
+    margin-bottom: 20px;
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+.hero-content p {
+    font-size: 1.3em;
+    color: var(--color-text-body);
+    margin-bottom: 40px;
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+/* Botones de Perfil en el Hero (Curriculum, LinkedIn, GitHub) - AZULES */
+.hero-buttons {
+    margin-bottom: 25px; /* Espacio debajo de los botones de perfil */
+    display: flex;
+    flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+    justify-content: center; /* Centra los botones horizontalmente */
+    gap: 15px; /* Espacio entre los botones */
+}
+
+.btn-hero { /* Estilo para Curriculum, LinkedIn, GitHub */
+    display: inline-block;
+    background-color: var(--color-blue-primary);
+    color: var(--color-white);
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color var(--transition-default), transform var(--transition-transform-hover), box-shadow var(--transition-default);
+    box-shadow: var(--shadow-btn-default);
+}
+
+.btn-hero:hover {
+    background-color: var(--color-blue-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-btn-default-hover);
+}
+
+/* Botón principal del Hero (AHORA "Sobre mí") - AZUL */
+.btn-primary { /* Estilo para el botón "Sobre mí" */
+    display: inline-block;
+    background-color: var(--color-blue-primary);
+    color: var(--color-white);
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color var(--transition-default), transform var(--transition-transform-hover), box-shadow var(--transition-default);
+    box-shadow: var(--shadow-btn-default);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-blue-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-btn-default-hover);
+}
+
+
+/* --- Sección Sobre Mí --- */
+#sobre {
+    background-color: var(--color-light-gray);
+}
+
+#sobre h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--color-dark);
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+.sobre-contenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    text-align: left;
+}
+
+.imagen-perfil img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--color-blue-primary);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: border-color var(--transition-default), box-shadow var(--transition-default); /* Transición para modo oscuro */
+}
+
+.texto-sobre {
+    max-width: 600px;
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: var(--color-text-label);
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+.texto-sobre strong {
+    color: var(--color-blue-primary);
+}
+
+/* --- Clases Base para Tarjetas (Certificados, Proyectos, Contacto) --- */
+.card-base {
+    background-color: var(--color-white);
+    border-radius: 10px;
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition-transform-shadow);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.card-base:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-large);
+}
+
+/* --- Galerías (Contenedores Flex para Tarjetas) --- */
+.galeria-certificados,
+.galeria-habilidades,
+.galeria-proyectos,
+.galeria-testimonios {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* --- Estilos para las tarjetas de Certificados (usa .card-base) --- */
+.certificado-item {
+    width: 300px;
+}
+
+.certificado-item img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+/* --- Estilos para las tarjetas de Habilidades (Diseño Circular y Flotante) --- */
+.habilidad-card {
+    background-color: var(--color-white);
+    border-radius: 50%;
+    box-shadow: var(--shadow-card-float);
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-transform-shadow-strong);
+    position: relative;
+}
+
+.habilidad-card:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: var(--shadow-card-float-hover);
+}
+
+.habilidad-card img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 5px;
+}
+
+.habilidad-card span {
+    font-size: 1em;
+    color: var(--color-dark);
+    font-weight: bold;
+    text-align: center;
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+/* --- Estilos para las tarjetas de Proyectos (usa .card-base) --- */
+.proyecto-card {
+    width: 300px;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.proyecto-card img {
+    max-width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.proyecto-card h3 {
+    font-size: 1.5em;
+    color: var(--color-dark);
+    margin-bottom: 10px;
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+.proyecto-card p {
+    font-size: 1em;
+    color: var(--color-text-body);
+    line-height: 1.5;
+    flex-grow: 1;
+    margin-bottom: 20px;
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+.btn-proyecto { /* Estilo para los botones "Ver Proyecto" dentro de cada tarjeta de proyecto */
+    display: inline-block;
+    background-color: var(--color-blue-primary);
+    color: var(--color-white);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color var(--transition-default), transform var(--transition-transform-hover), box-shadow var(--transition-default);
+    margin-top: auto; /* Para que se alinee al final de la tarjeta */
+    box-shadow: var(--shadow-btn-default);
+}
+
+.btn-proyecto:hover {
+    background-color: var(--color-blue-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-btn-default-hover);
+}
+
+
+/* --- Sección de Testimonios --- */
+#testimonios {
+    background-color: var(--color-medium-gray);
+}
+
+#testimonios h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: var(--color-dark);
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+.testimonio-item {
+    background-color: var(--color-white);
+    border-radius: 10px;
+    box-shadow: var(--shadow-medium);
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: background-color var(--transition-default), box-shadow var(--transition-default); /* Transición para modo oscuro */
+}
+
+.testimonio-item p {
+    font-style: italic;
+    color: var(--color-text-label);
+    margin-bottom: 20px;
+    flex-grow: 1;
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+.testimonio-autor {
+    font-weight: bold;
+    color: var(--color-dark);
+    margin-top: auto;
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+.testimonio-autor span {
+    display: block;
+    font-weight: normal;
+    color: #777;
+    font-size: 0.9em;
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+/* --- Modal para imágenes (para galerías de certificados/proyectos) --- */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    transition: background-color var(--transition-default), backdrop-filter var(--transition-default); /* Transición para modo oscuro */
+}
+
+.modal-contenido {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    background-color: var(--color-dark);
+    border-radius: 8px;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background-color var(--transition-default); /* Transición para modo oscuro */
+}
+
+.modal-contenido img {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: var(--color-white);
+    font-size: 40px;
+    font-weight: bold;
+    transition: var(--transition-default);
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.cerrar-modal:hover,
+.cerrar-modal:focus {
+    color: #bbb;
+    text-decoration: none;
+}
+
+/* --- Funcionalidad de 'Reveal' (elementos que aparecen al hacer scroll) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Sección de Contacto --- */
+#contacto {
+    background-color: var(--color-light-gray);
+    padding: 80px 0;
+    text-align: center;
+}
+
+#contacto h2 {
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    color: var(--color-dark);
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+#contacto p {
+    font-size: 1.1em;
+    color: var(--color-text-body);
+    margin-bottom: 50px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+/* Contact Form Card (Hereda de .card-base, con algunas sobrescrituras) */
+.contact-form-card {
+    border-radius: 12px;
+    box-shadow: var(--shadow-large);
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 40px;
+    box-sizing: border-box;
+    cursor: default; /* Anula el cursor:pointer de .card-base */
+}
+
+.contact-form-card:hover {
+    transform: translateY(-5px); /* Ligeramente diferente al hover de .card-base */
+    box-shadow: var(--shadow-hover-large); /* Sombra más pronunciada al pasar el mouse */
+}
+
+/* Agrupación de estilos para campos de formulario */
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: var(--color-text-label);
+    font-size: 1.05em;
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="text"][name="subject"],
+.form-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color var(--transition-default), box-shadow var(--transition-default), background-color var(--transition-default), color var(--transition-default); /* Transición para modo oscuro */
+    background-color: #fefefe;
+    color: var(--color-dark);
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="text"][name="subject"]:focus,
+.form-group textarea:focus {
+    border-color: var(--color-blue-primary);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.submit-btn { /* Estilo para el botón "Enviar" del formulario de contacto */
+    background-color: var(--color-blue-primary);
+    color: var(--color-white);
+    border: none;
+    padding: 15px 35px;
+    border-radius: 8px;
+    font-size: 1.15em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color var(--transition-default), transform var(--transition-transform-hover);
+    display: block;
+    margin: 30px auto 0 auto;
+    box-shadow: var(--shadow-btn-default);
+}
+
+.submit-btn:hover {
+    background-color: var(--color-blue-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-btn-default-hover);
+}
+
+.form-status {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1em;
+    display: none;
+    background-color: var(--color-green-success-bg);
+    color: var(--color-green-success-text);
+    transition: opacity var(--transition-default), background-color var(--transition-default), color var(--transition-default); /* Transición para modo oscuro */
+}
+
+/* --- Pie de Página (Footer) --- */
+.footer {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    padding: 30px 0;
+    text-align: center;
+    font-size: 0.9em;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-default), color var(--transition-default), box-shadow var(--transition-default); /* Transición para modo oscuro */
+}
+
+.footer p {
+    margin-bottom: 15px;
+    color: var(--color-white);
+    transition: color var(--transition-default); /* Transición para modo oscuro */
+}
+
+.footer .social-links img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    vertical-align: middle; /* Alinea los iconos con el texto si hubiera */
+    transition: transform var(--transition-default);
+}
+
+.footer .social-links img:hover {
+    transform: scale(1.1);
+}
+
+/* --- Estilos para el Modo Nocturno (Dark Mode) --- */
+/* Cuando la clase 'dark-mode' esté en el <body>, se aplicarán estos estilos */
+body.dark-mode {
+    background-color: var(--dark-mode-bg-main);
+    color: var(--dark-mode-text-main);
+}
+
+body.dark-mode .navbar {
+    background-color: var(--dark-mode-bg-navbar);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .nav-links a {
+    color: #a0a0a0; /* Enlaces de navbar más suaves en modo oscuro */
+}
+
+body.dark-mode .nav-links a:hover {
+    background-color: #2a2a3e;
+    color: var(--color-white);
+}
+
+body.dark-mode .lang-button,
+body.dark-mode .dark-mode-toggle {
+    background-color: var(--dark-mode-bg-section);
+    color: var(--dark-mode-text-main);
+    border-color: var(--dark-mode-border-input);
+}
+
+body.dark-mode .lang-button:hover,
+body.dark-mode .dark-mode-toggle:hover {
+    background-color: #3a3a4e;
+    color: var(--color-white);
+    border-color: #5a5a6e;
+}
+
+body.dark-mode .section {
+    background-color: var(--dark-mode-bg-section);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+    color: var(--dark-mode-text-title);
+}
+
+body.dark-mode p {
+    color: var(--dark-mode-text-main);
+}
+
+/* Modo nocturno para TODOS los botones principales (Hero, Proyectos, Contacto) - AZULES */
+body.dark-mode .btn-hero,
+body.dark-mode .btn-primary,
+body.dark-mode .btn-proyecto,
+body.dark-mode .submit-btn {
+    background-color: var(--dark-mode-blue-primary); /* Azul para botones en modo oscuro */
+    color: var(--color-white); /* Mantener texto blanco para buen contraste */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Sombra estándar para botones oscuros */
+}
+
+body.dark-mode .btn-hero:hover,
+body.dark-mode .btn-primary:hover,
+body.dark-mode .btn-proyecto:hover,
+body.dark-mode .submit-btn:hover {
+    background-color: var(--dark-mode-blue-hover); /* Azul hover en modo oscuro */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Sombra de hover más pronunciada */
+}
+
+body.dark-mode .sobre-contenido .imagen-perfil img {
+    border-color: #5a5a6e;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .card-base {
+    background-color: var(--dark-mode-bg-card);
+    box-shadow: var(--dark-mode-shadow-card);
+}
+
+body.dark-mode .card-base:hover {
+    box-shadow: var(--dark-mode-shadow-card-hover);
+}
+
+body.dark-mode .habilidad-card:hover {
+    box-shadow: var(--dark-mode-shadow-float-hover);
+}
+
+body.dark-mode .habilidad-card span {
+    color: var(--dark-mode-text-title);
+}
+
+body.dark-mode .proyecto-card h3 {
+    color: var(--dark-mode-text-title);
+}
+
+body.dark-mode .proyecto-card p {
+    color: var(--dark-mode-text-main);
+}
+
+body.dark-mode .testimonio-item {
+    background-color: var(--dark-mode-bg-card);
+}
+
+body.dark-mode .testimonio-item p {
+    color: var(--dark-mode-text-main);
+}
+
+body.dark-mode .testimonio-autor {
+    color: var(--dark-mode-text-title);
+}
+
+body.dark-mode .testimonio-autor span {
+    color: #a0a0a0;
+}
+
+body.dark-mode .modal-contenido {
+    background-color: var(--dark-mode-bg-navbar);
+}
+
+body.dark-mode .cerrar-modal {
+    color: var(--dark-mode-text-title);
+}
+
+body.dark-mode #contacto h2,
+body.dark-mode #contacto p {
+    color: var(--dark-mode-text-title);
+}
+
+body.dark-mode .form-group label {
+    color: var(--dark-mode-text-main);
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea {
+    background-color: var(--dark-mode-bg-input);
+    border-color: var(--dark-mode-border-input);
+    color: var(--dark-mode-text-main);
+}
+
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group textarea:focus {
+    border-color: var(--dark-mode-border-focus);
+    box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.3);
+}
+
+body.dark-mode .form-status {
+    background-color: var(--dark-mode-form-status-bg);
+    color: var(--dark-mode-form-status-text);
+}
+
+body.dark-mode .footer {
+    background-color: var(--dark-mode-bg-navbar);
+    color: var(--dark-mode-text-main);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .footer p {
+    color: var(--dark-mode-text-main);
+}
+
+/* --- Responsive Design (Media Queries) --- */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 0;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .nav-links a {
+        padding: 8px 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .lang-button,
+    .dark-mode-toggle {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .section {
+        padding: 40px 0;
+    }
+    .section h2 {
+        font-size: 2em;
+    }
+    .galeria-certificados,
+    .galeria-habilidades,
+    .galeria-proyectos,
+    .galeria-testimonios {
+        flex-direction: column;
+        align-items: center;
+    }
+    .certificado-item,
+    .habilidad-card,
+    .proyecto-card,
+    .testimonio-item {
+        width: 90%;
+        max-width: 350px;
+    }
+    .sobre-contenido {
+        flex-direction: column;
+        text-align: center;
+    }
+    .imagen-perfil img {
+        width: 150px;
+        height: 150px;
+    }
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+    .hero-content p {
+        font-size: 1em;
+    }
+    
+    /* Botones de Hero en móvil */
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .btn-hero,
+    .btn-primary,
+    .btn-proyecto,
+    .submit-btn {
+        width: 80%;
+        max-width: 280px;
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    /* Ajuste para burbujas de habilidad en móvil */
+    .habilidad-card {
+        width: 120px;
+        height: 120px;
+    }
+    .habilidad-card img {
+        width: 60px;
+        height: 60px;
+    }
+    .habilidad-card span {
+        font-size: 0.9em;
+    }
+
+    /* Ajustes para el formulario de contacto en móvil */
+    .contact-form-card {
+        margin: 0 20px;
+        padding: 30px 20px;
+    }
+    #contacto h2 {
+        font-size: 2.2em;
+    }
+    #contacto p {
+        font-size: 0.95em;
+        margin-bottom: 30px;
+    }
+    .form-group input,
+    .form-group textarea {
+        padding: 12px 15px;
+    }
+}

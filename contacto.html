@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto – Portafolio profesional</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html" class="lang" data-es="Inicio" data-en="Home">Inicio</a>
+            <a href="sobre-mi.html" class="lang" data-es="Sobre mí" data-en="About Me">Sobre mí</a>
+            <a href="Habilidades.html" class="lang" data-es="Habilidades" data-en="Skills">Habilidades</a>
+            <a href="Proyectos.html" class="lang" data-es="Proyectos" data-en="Projects">Proyectos</a>
+            <a href="contacto.html" class="lang" data-es="Contacto" data-en="Contact">Contacto</a>
+            <button class="lang-button" onclick="cambiarIdioma()">EN</button>
+        </div>
+    </nav>
+
+    <section id="contacto" class="section reveal">
+        <div class="container">
+            <h2 class="lang" data-es="Contáctame" data-en="Contact Me">Contáctame</h2>
+            <p class="lang" data-es="¡Estoy emocionado de saber de ti! Completa el formulario y me pondré en contacto lo antes posible." data-en="I'm excited to hear from you! Fill out the form below and I'll get back to you as soon as possible.">¡Estoy emocionado de saber de ti! Completa el formulario y me pondré en contacto lo antes posible.</p>
+
+            <div class="contact-form-card">
+                <form id="contactForm" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name" class="lang" data-es="Nombre:" data-en="Name:">Nombre:</label>
+                        <input type="text" id="name" name="name" required placeholder="Tu nombre completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="lang" data-es="Email:" data-en="Email:">Email:</label>
+                        <input type="email" id="email" name="email" required placeholder="tu.email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject" class="lang" data-es="Asunto:" data-en="Subject:">Asunto:</label>
+                        <input type="text" id="subject" name="subject" required placeholder="Motivo de tu mensaje">
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="lang" data-es="Mensaje:" data-en="Message:">Mensaje:</label>
+                        <textarea id="message" name="message" rows="6" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn lang" data-es="Enviar Mensaje" data-en="Send Message">Enviar Mensaje</button>
+                    <div id="formStatus" class="form-status"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Sistema de idiomas
+        let idiomaActual = localStorage.getItem('idioma') || 'es';
+
+        function cambiarIdioma() {
+            const elementos = document.querySelectorAll('.lang');
+            idiomaActual = idiomaActual === 'es' ? 'en' : 'es';
+
+            elementos.forEach(el => {
+                const nuevoTexto = el.dataset[idiomaActual];
+                if (nuevoTexto) {
+                    el.textContent = nuevoTexto;
+                }
+            });
+
+            const btn = document.querySelector('.lang-button');
+            if (btn) {
+                btn.textContent = idiomaActual === 'es' ? 'EN' : 'ES';
+            }
+
+            localStorage.setItem('idioma', idiomaActual);
+        }
+
+        // Aplicar idioma al cargar y manejar enlaces de navegación
+        window.addEventListener('DOMContentLoaded', () => {
+            cambiarIdioma();
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const target = this.getAttribute('href');
+
+                    if (target && !target.startsWith("http")) {
+                        window.location.href = target;
+                    } else if (target) {
+                        window.open(target, "_blank");
+                    }
+                });
+            });
+
+            // Script para manejar el envío del formulario (simulado)
+            const contactForm = document.getElementById('contactForm');
+            const formStatus = document.getElementById('formStatus');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Evita el envío real del formulario
+
+                formStatus.style.display = 'block';
+                formStatus.style.backgroundColor = '#d4edda'; // Fondo verde claro
+                formStatus.style.color = '#155724'; // Texto verde oscuro
+                formStatus.textContent = '¡Mensaje enviado con éxito! Te responderé pronto.';
+
+                // Limpiar el formulario y ocultar el mensaje después de 3 segundos
+                setTimeout(() => {
+                    contactForm.reset();
+                    formStatus.style.display = 'none';
+                }, 3000);
+            });
+        });
+
+        // Funcionalidad para revelar elementos al hacer scroll
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.reveal').forEach(element => {
+            revealObserver.observe(element);
+        });
+    </script>
+
+</body>
+</html>
